@@ -6,7 +6,14 @@ import renderer from 'react-test-renderer';
 import Gift from './Gift';
 
 describe('Gift', () => {
-  const gift = shallow(<Gift />);
+  const mockRemove = jest.fn();
+  const id = 1;
+  const props = {
+    gift: { id },
+    removeGift: mockRemove
+  };
+  
+  const gift = shallow(<Gift {...props} />);
 
   test('renders properly', () => {
     const tree = renderer.create(<Gift />).toJSON();
@@ -26,14 +33,23 @@ describe('Gift', () => {
       expect(gift.state().person).toBe(person);
     });
   });
-  
+
   describe('when typinng into the present input', () => {
     const present = 'Golf Clubs';
     beforeEach(() => {
-      gift.find('.input-present').simulate('change', {target: {value: present}});
+      gift.find('.input-present').simulate('change', { target: { value: present } });
     });
     test('updates the present in `state`', () => {
       expect(gift.state().present).toBe(present);
+    });
+  });
+
+  describe('when clicking the `remove Gift` button', () => {
+    beforeEach(() => {
+      gift.find('.btn-remove').simulate('click');
+    });
+    test('calls the removeGift callback', () => {
+      expect(mockRemove).toHaveBeenCalledWith(id);
     });
   });
 });
