@@ -26,4 +26,14 @@ describe('Gift', () => {
       expect(gift.state().person).toBe(person);
     });
   });
+  
+  describe('when typinng into the present input', () => {
+    const present = 'Golf Clubs';
+    beforeEach(() => {
+      gift.find('.input-present').simulate('change', {target: {value: present}});
+    });
+    test('updates the present in `state`', () => {
+      expect(gift.state().present).toBe(present);
+    });
+  });
 });

@@ -18,6 +18,19 @@ exports[`Gift renders properly 1`] = `
         onChange={[Function]}
       />
     </div>
+    <div
+      className="form-group"
+    >
+      <label
+        className="form-label"
+      >
+        Present
+      </label>
+      <input
+        className="input-present form-control"
+        onChange={[Function]}
+      />
+    </div>
   </form>
 </div>
 `;
